@@ -72,5 +72,4 @@ const style = StyleSheet.create({
   text: {
     fontSize: 15,
   }
-
 });
