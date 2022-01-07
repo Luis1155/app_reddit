@@ -22,17 +22,16 @@ const Header = ({
         );
     }
     return (
-      <View style={style.lateral}>
-        <TouchableOpacity
-          onPress={func}
+      <TouchableOpacity
+        style={style.lateral}
+        onPress={func}
         >
-          <Icon
-            name={icon}
-            size={25}
-            color={'black'}
-          />
-        </TouchableOpacity>
-      </View>
+        <Icon
+          name={icon}
+          size={25}
+          color={'black'}
+        />
+      </TouchableOpacity>
     );
   }
 

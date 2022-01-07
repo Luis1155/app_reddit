@@ -26,17 +26,7 @@ const App = () => {
 
   useEffect(() => {
     const backAction = () => {
-      post_select ?
-        setPostSelect('')
-      :
-        Alert.alert("Hold on!", "Are you sure you want to go back?", [
-          {
-            text: "Cancel",
-            onPress: () => null,
-            style: "cancel"
-          },
-          { text: "YES", onPress: () => BackHandler.exitApp() }
-        ]);
+      setPostSelect('')
       return true;
     };
 
@@ -48,12 +38,14 @@ const App = () => {
     return () => backHandler.remove();
   }, []);
 
+  //Get posts from api of reddit and set in state
   const getData = async end => {
     const response = await fetch(`https://api.reddit.com/r/pics/${end}.json`);
     const {data} = await response.json();
     setData(data.children);
   };
 
+  //Render an element of the data
   const renderItem = ({item}) => {
     return (
       <Item 
@@ -63,12 +55,14 @@ const App = () => {
     );
   };
 
+  //Function to refresh and update data
   const onRefresh = () => {
     setRefreshing(true);
     getData(menu_select);
     setRefreshing(false);
   };
 
+  //Render of all elements of the data
   const renderListData = () => {
     return (
       <FlatList
@@ -81,6 +75,7 @@ const App = () => {
     );
   };
 
+  //Render an element of the menu 
   const renderItemMenu = ({item}) => {
     const backgroundColor = item.value === menu_select ? '#ff4500' : '#F9f9f9';
     const color = item.value === menu_select ? 'white' : '#666666';
@@ -94,6 +89,7 @@ const App = () => {
     );
   };
 
+  //Render of all elements of the menu
   const renderMenu = () => {
     return (
       <FlatList
@@ -106,8 +102,9 @@ const App = () => {
     );
   };
 
+  //Render of the webview when select a post
   const renderWebView = () => {
-    const url = `https://www.reddit.com/${post_select.data.permalink}`
+    const url = `https://www.reddit.com${post_select.data.permalink}`
     return(
       <WebView
         source={{ uri: url }}
