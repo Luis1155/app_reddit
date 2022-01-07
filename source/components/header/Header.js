@@ -14,11 +14,12 @@ const Header = ({
   onPressRight,
   title }) => {
 
+    
   const generateLateralIcon= (icon, func) => {
     if (!icon) {
       return (
         <View style={style.lateral} />
-      );
+        );
     }
     return (
       <View style={style.lateral}>
