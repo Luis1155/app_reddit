@@ -2,19 +2,22 @@ import React from 'react';
 import {Text, View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import moment from 'moment';
 
-const Item = ({item}) => {
-  const image = item.data.thumbnail.includes('http')
+const Item = ({item, onPress}) => {
+  const have_image = item.data.thumbnail.includes('http')
+  const image = have_image
     ? {uri: item.data.thumbnail}
     : require('../../assets/no_pic.png')
   const date = moment(item.data.created*1000).fromNow()
 
   return(
-    <TouchableOpacity style={style.container}>
-      <Image
-        source={image}
-        resizeMode={'cover'}
-        style={style.image}
-      />
+    <TouchableOpacity style={style.container} onPress={onPress}>
+      <View style={style.container_image}>
+        <Image
+          source={image}
+          resizeMode={'cover'}
+          style={have_image ? style.image : {width:'70%', height:'60%'}}
+        />
+      </View>
       <View style={style.info}>
         <View style={style.sub_container}>
           <Text style={style.text}>
@@ -29,10 +32,10 @@ const Item = ({item}) => {
         </Text>
         <View style={[style.sub_container, {justifyContent:'flex-end'}]}>
           <Text style={style.text}>
-            Score: {item.data.score}✨
+          ✨ Score: {item.data.score}
           </Text>
           <Text style={[style.text, {paddingLeft: 10}]}>
-            Comments: {item.data.num_comments}💬
+          💬 Comments: {item.data.num_comments}
           </Text>
         </View>
       </View>
@@ -44,11 +47,16 @@ export default Item
 
 const style = StyleSheet.create({
   container: {
-    margin:5, 
+    marginHorizontal:5, 
     height: 110, 
     borderColor:'#bbb',
     flexDirection:'row', 
     borderBottomWidth: 0.5, 
+  },
+  container_image: {
+    width:'25%',
+    alignItems:'center',
+    justifyContent:'center',
   },
   title: {
     fontSize:18, 
@@ -66,7 +74,7 @@ const style = StyleSheet.create({
     justifyContent:'space-between'
   },
   image: {
-    width:'25%', 
+    width:'100%', 
     height:'90%'
   },
   text: {

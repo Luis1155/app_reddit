@@ -45,7 +45,7 @@ const Header = ({
         )
       }
       <View style={style.center}>
-        <Text style={style.title}>
+        <Text style={style.title} numberOfLines={1}>
           {title}
         </Text>
       </View>
