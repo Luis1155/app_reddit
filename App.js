@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   StatusBar,
@@ -7,6 +7,18 @@ import {
 import Header from './source/components/header/Header';
 
 const App = () => {
+  const [data, setData] = useState('')
+
+  useEffect(() => {
+    getData()
+  }, []);
+
+  const getData = async () => {
+    const response = await fetch("https://api.reddit.com/r/pics/new.json");
+    const data = await response.json();
+    setData(JSON.stringify(data))
+  }
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -20,6 +32,10 @@ const App = () => {
         <Text
           style={{textAlign: 'center'}}>
             App Reddit
+        </Text>
+        <Text
+          style={{textAlign: 'center'}}>
+            {data}
         </Text>
       </SafeAreaView>
     </>
