@@ -4,13 +4,19 @@ import {
   StatusBar,
   SafeAreaView
 } from 'react-native';
+import Header from './source/components/header/Header';
 
 const App = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView 
-        style={{flex: 1, justifyContent: 'center'}}>
+        style={{flex: 1}}>
+        <Header 
+          left_item={'chevron-left'}
+          // onPressLeft={() => alert('Holi')}
+          title={'Title App Reddit'}
+        />
         <Text
           style={{textAlign: 'center'}}>
             App Reddit
